@@ -1,4 +1,5 @@
 ﻿
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Restaurant.Models;
 using Restaurant.Models.Request;
@@ -7,6 +8,7 @@ using Restaurant.Models.Response;
 namespace Restaurant.Controllers
 {
     [Route("api/[controller]")]
+    
     [ApiController]
     public class MaestroPaisController : ControllerBase
     {
@@ -32,6 +34,7 @@ namespace Restaurant.Controllers
             return Ok(oRespuesta);
         }
 
+      
         [HttpPost]
 
         public IActionResult Add(MaestroPaisRequest oModel)
