@@ -50,6 +50,7 @@ builder.Services.AddScoped<IRInfService, RInfService>();
 builder.Services.AddScoped<IRSedeService, RSedeService>();
 builder.Services.AddScoped<ISsoUsuarioService, SsoUsuarioService>();
 builder.Services.AddScoped<ISsoUsuarioAgregarService, SsoUsuarioAgregarService>();
+builder.Services.AddScoped<IColorService, ColorService>();
 
 
 builder.Services.AddControllersWithViews()

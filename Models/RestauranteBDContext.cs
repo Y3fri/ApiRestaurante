@@ -16,6 +16,7 @@ namespace Restaurant.Models
         {
         }
 
+        public virtual DbSet<Color> Colors { get; set; } = null!;
         public virtual DbSet<MaestroDepartamento> MaestroDepartamentos { get; set; } = null!;
         public virtual DbSet<MaestroMunicipio> MaestroMunicipios { get; set; } = null!;
         public virtual DbSet<MaestroPai> MaestroPais { get; set; } = null!;
@@ -51,6 +52,57 @@ namespace Restaurant.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Color>(entity =>
+            {
+                entity.HasKey(e => e.ColId);
+
+                entity.ToTable("Color");
+
+                entity.Property(e => e.ColId).HasColumnName("col_id");
+
+                entity.Property(e => e.ColConteMenu)
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasColumnName("col_conteMenu");
+
+                entity.Property(e => e.ColEncabezado)
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasColumnName("col_encabezado");
+
+                entity.Property(e => e.ColFondo)
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasColumnName("col_fondo");
+
+                entity.Property(e => e.ColFuente)
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasColumnName("col_fuente");
+
+                entity.Property(e => e.ColRestarurante).HasColumnName("col_restarurante");
+
+                entity.Property(e => e.ColTitEncabezado)
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasColumnName("col_titEncabezado");
+
+                entity.Property(e => e.ColTituMenu)
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasColumnName("col_tituMenu");
+
+                entity.Property(e => e.ColTitulos)
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasColumnName("col_titulos");
+
+                entity.HasOne(d => d.ColRestaruranteNavigation)
+                    .WithMany(p => p.Colors)
+                    .HasForeignKey(d => d.ColRestarurante)
+                    .HasConstraintName("FK_Color_Restaurante.Informacion1");
+            });
+
             modelBuilder.Entity<MaestroDepartamento>(entity =>
             {
                 entity.HasKey(e => e.DepId)
@@ -518,7 +570,6 @@ namespace Restaurant.Models
                     .HasColumnName("inf_email_principal");
 
                 entity.Property(e => e.InfLogo)
-                    .HasMaxLength(800)
                     .IsUnicode(false)
                     .HasColumnName("inf_logo");
 
